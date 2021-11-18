@@ -6,11 +6,6 @@ pipeline {
   }
   agent any
   stages {
-    // stage('Cloning Git') {
-    //   steps {
-    //     git 'https://github.com/Reekaa/DevOps_Coursework2.git'
-    //   }
-    // }
     stage('Building docker image') {
       steps{
         script {
