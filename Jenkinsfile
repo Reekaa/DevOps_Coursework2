@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "rekaforgacs/devops_coursework2"
+    image = "rekaforgacs/devops_coursework2"
     registryCredential = 'dockerhub'
     dockerImage = ''
   }
@@ -14,7 +14,7 @@ pipeline {
     stage('Building docker image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build image
         }
       }
     }
@@ -22,14 +22,15 @@ pipeline {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
+            dockerImage.push("$BUILD_NUMBER")
+            dockerImage.push('latest')
           }
         }
       }
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $image:$BUILD_NUMBER"
       }
     }
   }
