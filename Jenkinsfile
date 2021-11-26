@@ -23,14 +23,14 @@ pipeline {
         }
       }
     }
-    stage('Test image') {
+    stage('Run docker image') {
       steps{
         script {
           docker.withRegistry( '', registryCredential ) {
-            dockerImage.build("image:$BUILD_NUMBER")
-            dockerImage.push('latest')
+            dockerImage.run("$image:$BUILD_NUMBER")
           }
         }
+        sh "docker ps"
       }
     }
     stage('Remove Unused docker image') {
