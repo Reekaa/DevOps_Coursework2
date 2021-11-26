@@ -23,6 +23,16 @@ pipeline {
         }
       }
     }
+    stage('Test image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.build("image:$BUILD_NUMBER")
+            dockerImage.push('latest')
+          }
+        }
+      }
+    }
     stage('Remove Unused docker image') {
       steps{
         sh "docker rmi $image:$BUILD_NUMBER"
