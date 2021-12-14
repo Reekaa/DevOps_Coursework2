@@ -1,0 +1,8 @@
+- name: A playbook for deploying image from Dockerhub to Kubernetes
+  hosts: localhost
+  user: ubuntu
+
+  tasks:
+  - name: Deploy image from Dockerhub
+    shell:
+      cmd: kubectl create deployment devops-coursework2 --image=rekaforgacs/devops_coursework2:latest

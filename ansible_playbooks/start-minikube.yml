@@ -1,0 +1,8 @@
+- name: A playbook to start minikube
+  hosts: localhost
+  user: ubuntu
+
+  tasks:
+  - name: Start Minikube
+    shell:
+      cmd: minikube start

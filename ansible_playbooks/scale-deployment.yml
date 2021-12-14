@@ -1,0 +1,8 @@
+- name: A playbook for scaling deployment
+  hosts: localhost
+  user: ubuntu
+
+  tasks:
+  - name: Scaling deployment
+    shell:
+      cmd: kubectl scale deployments/devops-coursework2 --replicas=4c

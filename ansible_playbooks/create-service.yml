@@ -1,0 +1,8 @@
+- name: A playbook for creating a NodePort Service
+  hosts: localhost
+  user: ubuntu
+
+  tasks:
+  - name: Creating a Service
+    shell:
+      cmd: kubectl expose deployment/devops-coursework2 --type="NodePort" --port 8080 --name node-port-service

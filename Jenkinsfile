@@ -30,7 +30,16 @@ pipeline {
             dockerImage.run("$image:$BUILD_NUMBER")
           }
         }
-        sh "docker ps"
+        sh 'docker ps'
+      }
+    }
+    stage('Update deployment') {
+      steps{
+        withKubeConfig([credentialsId: 'kubernetes-config']) {
+          sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'  
+          sh 'chmod u+x ./kubectl'  
+          sh "./kubectl set image deployments/devops-coursework2 devops-coursework2=$image:$BUILD_NUMBER"
+        }
       }
     }
     stage('Remove Unused docker image') {

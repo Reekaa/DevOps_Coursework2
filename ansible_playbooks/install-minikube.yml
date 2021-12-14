@@ -1,0 +1,21 @@
+- name: A playbook for minikube setup
+  hosts: localhost
+  user: ubuntu
+  become: true
+
+  tasks:
+  - name: 1. Update APT Package Managerapt
+    apt:
+      update_cache: yes
+
+  - name: 2. Install dependency packages
+    apt:
+      name: apt-transport-https
+
+  - name: 3. Install curl
+    apt:
+      name: curl
+
+  - name: 4. Minikube install
+    shell:
+      cmd: curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && mv minikube /usr/local/bin/
