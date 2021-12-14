@@ -38,7 +38,7 @@ pipeline {
         withKubeConfig([credentialsId: 'kubernetes-config']) {
           sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"'  
           sh 'chmod u+x ./kubectl'  
-          sh "./kubectl set image deployments/devops-coursework2 devops-coursework2=$image:$BUILD_NUMBER"
+          sh "./kubectl set image deployments/devops-coursework2 devops-coursework2-shfp4=$image:$BUILD_NUMBER"
         }
       }
     }
